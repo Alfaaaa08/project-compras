@@ -6,9 +6,10 @@
         "build": "tsc && vite build"
     },
     "devDependencies": {
-        "@headlessui/react": "^2.0.0",
+        "@headlessui/react": "2.1.1",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@tanstack/virtual-core": "^3.9.0",
         "@types/node": "^18.13.0",
         "@types/react": "^18.0.28",
         "@types/react-dom": "^18.0.10",
@@ -22,5 +23,9 @@
         "tailwindcss": "^3.2.1",
         "typescript": "^5.0.2",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "@inertiajs/inertia-react": "^0.8.1",
+        "@inertiajs/progress": "^0.2.7"
     }
 }
