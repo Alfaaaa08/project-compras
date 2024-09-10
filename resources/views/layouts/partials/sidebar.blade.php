@@ -11,7 +11,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                <!-- Add icons to the links using the .nav-icon class -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -42,7 +41,8 @@
 
 <script>
     function loadRoutine(id) {
-        window.Inertia.visit(`/routine`, {
+        console.log('Inertia');
+        nertia.visit(`/routine`, {
             method: 'get',
             data: { id },
             preserveState: true,

@@ -1,35 +1,39 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\RoutineController;
+use App\Http\Controllers\OrcamentoRoutineController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+
+Route::get('/login', function () {
+    return Inertia::render('Login');
+});
+
+Route::get('/register', function () {
+    return Inertia::render('Register');
+});
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+    return Inertia::render('/', [
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/routine', [RoutineController::class, 'index'])->name('routine');
 
-/**
- * @todo Add the authorization with middleware
- */
-Route::get('/routine/{id}', function ($id) {
-    return Inertia::render('routine', ['id' => $id]);
-})->name('routine');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/includeRoutine', function () {
+    return Inertia::render('IncludeRoutine');
 });
 
+Route::post('/orcamento/routine/include', [OrcamentoRoutineController::class, 'store'])->name('/orcamento/routine/include');
+
+Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
+
+Route::post('/save/login', [LoginController::class, 'store'])->name('/save/login');
 
 require __DIR__.'/auth.php';
+

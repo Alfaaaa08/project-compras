@@ -7,51 +7,66 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
 
-    <!-- Scripts -->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+
     @routes
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx", 'resources/js/Pages/routine.tsx'])
     @inertiaHead
+
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+
+        .login-logo img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .login-logo a {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+    </style>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper" style="flex: 1;">
+<body>
 
-        <!-- Side Bar -->
-        @include('layouts.partials.sidebar')
+    @if(!request()->is('login') && !request()->is('register'))
+    <div class="wrapper">
+        <div id="react-sidebar"></div>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            @include('layouts.partials.mainContent')
+        @if(request()->is('/'))
+        <div class="content-wrapper d-flex justify-content-center align-items-center opacity-55">
+            <img src="/images/example-logo.png" alt="AdminLTE Logo" class="brand-image img-circle">
         </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <div class="row">
-                <div class="col-md-3 offset-md-0">
-                    <form action="">
-                        <div class="input-group">
-                            <input type="search" class="form-control form-control-lg" placeholder="Procure pela rotina">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-lg btn-default">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </footer>
+        @else
+        <div class="content-wrapper">
+            @if(request()->is('includeRoutine'))
+            <div id="react-include-routine"></div>
+            @endif
+            @inertia
+        </div>
     </div>
-    <!-- ./wrapper -->
+    @endif
+    @endif
+
+    @inertia
+
+    @viteReactRefresh
+    @vite('resources/js/app.tsx')
+
 </body>
 
 </html>
