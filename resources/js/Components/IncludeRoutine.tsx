@@ -173,7 +173,6 @@ export default function IncludeRoutine() {
         formData.append('fabricante[cnpj]', cnpj);
 
         products.forEach((produto, index) => {
-            console.log(produto)
             Object.keys(produto).forEach(key => {
                 formData.append(`produtos[${index}][${key}]`, produto[key as keyof Produto] || '');
             });

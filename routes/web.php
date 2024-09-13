@@ -31,6 +31,8 @@ Route::get('/includeRoutine', function () {
 
 Route::post('/orcamento/routine/include', [OrcamentoRoutineController::class, 'store'])->name('/orcamento/routine/include');
 
+Route::post('/orcamento/routine/delete', [RoutineController::class, 'delete'])->name('/orcamento/routine/delete');
+
 Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
 
 Route::post('/save/login', [LoginController::class, 'store'])->name('/save/login');

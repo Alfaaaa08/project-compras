@@ -13,6 +13,8 @@ interface Orcamento {
 }
 
 export default function Routine() {
+    const [ selectedFilter, setSelectedFilter ] = useState(''); 
+    const [ filterValue,    setFilterValue ] = useState(''); 
     const { orcamentos } = usePage<{ orcamentos: Orcamento[] }>().props;
     
     // Estado para controlar a posição e visibilidade do menu de contexto
@@ -50,6 +52,19 @@ export default function Routine() {
         });
     };
 
+    const handleConsultarClick = () => {
+        Inertia.visit(`/routine`, {
+            data: {
+                'selectedFilter' : selectedFilter,
+                'filterValue' : filterValue
+            },
+            preserveState: true,
+            preserveScroll: true, 
+            // only: ['routineComponent']
+        });
+
+    }
+
     const handleAlterar = () => {
         if (contextMenu.item) {
             Inertia.visit(`/updateOrcamento/${contextMenu.item}`);
@@ -57,8 +72,15 @@ export default function Routine() {
     };
 
     const handleExcluir = () => {
+        const formData = new FormData();
+
         if(contextMenu.item) {
-            Inertia.visit(`/deleteOrcamento/${contextMenu.item}`);
+            formData.append('item', contextMenu.item.toString());
+
+            Inertia.post('/orcamento/routine/delete', formData, {
+                onError : error => console.log(error),
+                onSuccess : success => console.log(success)
+            });
         }
     }
 
@@ -73,16 +95,14 @@ export default function Routine() {
                         <div className="card-body">
                             <div className="form-inline">
                                 <label className="mr-3">Filtros</label>
-                                <select className="custom-select mr-3">
-                                    <option>Cliente</option>
-                                    <option selected>Nome do cliente</option>
-                                    <option>Produto</option>
-                                    <option>Nome do produto</option>
-                                    <option>Fabricante</option>
-                                    <option>Nome do fabricante</option>
+                                <select onChange={(e) => {setSelectedFilter(e.target.value)}} className="custom-select mr-3">
+                                    <option value={1}>Cliente</option>
+                                    <option value={2}>Nome do cliente</option>
+                                    <option value={3}>Orçamento</option>
+                                    <option value={4}>Produto</option>
                                 </select>
-                                <input type="text" className="form-control rounded w-50" placeholder="Insira o filtro desejado..." />
-                                <a className="btn ml-3 btn-outline-primary">
+                                <input onChange={(e) => setFilterValue(e.target.value)} type="text" className="form-control rounded w-50" placeholder="Insira o filtro desejado..." />
+                                <a className="btn ml-3 btn-outline-primary" onClick={handleConsultarClick}>
                                     <i className="fas fa-search"></i> Consultar
                                 </a>
                                 <a className="btn ml-3 btn-outline-primary" onClick={loadIncludeRoutine}>

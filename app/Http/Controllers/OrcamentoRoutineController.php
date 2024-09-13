@@ -128,9 +128,7 @@ class OrcamentoRoutineController extends Controller {
     }
 
     private function addProdutosOrcamento($id_orcamento, $ids_produtos) {
-
         foreach($ids_produtos as $id_produto) {
-            // dd($id_produto, $id_orcamento);
             Produtos_Orcamento::create([
                 'id_produto' => $id_produto,
                 'id_orcamento' => $id_orcamento
