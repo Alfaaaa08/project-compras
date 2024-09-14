@@ -67,7 +67,11 @@ export default function Routine() {
 
     const handleAlterar = () => {
         if (contextMenu.item) {
-            Inertia.visit(`/updateOrcamento/${contextMenu.item}`);
+            Inertia.visit(`/includeRoutine`, {
+                data: {
+                    'id' : contextMenu.item
+                }
+            });
         }
     };
 

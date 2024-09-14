@@ -75,10 +75,14 @@ class OrcamentoRoutineController extends Controller {
      * Inserts or updates a fabricante on the 'fabricantes' table.
      * 
      * @param object $request
-     * @return integer
+     * @return integer | null
      */
     private function addOrUpdateFabricante($request) {
         $fabricante_data = $request->fabricante;
+
+        if(!$fabricante_data['nome']) {
+            return null;
+        }
 
         if(Fabricantes::select('id')->where('nome', '=', $fabricante_data['nome'])->exists()) {
             Fabricantes::where("nome", "=", $fabricante_data['nome'])->update([
