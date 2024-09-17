@@ -49,7 +49,7 @@
 
         @if(request()->is('/'))
         <div class="content-wrapper d-flex justify-content-center align-items-center opacity-55">
-            <img src="/images/example-logo.png" alt="AdminLTE Logo" class="brand-image img-circle">
+            <img src="/images/example-logo.png" alt="" class="brand-image img-circle">
         </div>
         @else
         <div class="content-wrapper">

@@ -88,6 +88,15 @@ export default function Routine() {
         }
     }
 
+    const handleImprimir = () => {
+        const formData = new FormData();
+
+        if(contextMenu.item) {
+            formData.append('item', contextMenu.item.toString());
+            Inertia.post('/orcamento/routine/print', formData)
+        }
+    }
+
     return (
         <div id="routine" onClick={handleOutsideClick}>
             <div className="content">
@@ -149,8 +158,9 @@ export default function Routine() {
             {contextMenu.visible && (
                 <div style={{ top: contextMenu.y, left: contextMenu.x, position: 'absolute', zIndex: 1000, backgroundColor: '#fff', boxShadow: '0px 0px 10px rgba(0,0,0,0.2)' }}>
                     <ul className="list-group">
-                        <li className="list-group-item list-group-item-action" onClick={handleAlterar}>Alterar</li>
-                        <li className="list-group-item list-group-item-action" onClick={handleExcluir}>Excluir</li>
+                        <li className="list-group-item list-group-item-action" onClick={handleAlterar}><i className="fas fa-pen pr-2"></i>Alterar</li>
+                        <li className="list-group-item list-group-item-action" onClick={handleExcluir}><i className="fas fa-trash pr-2"></i>Excluir</li>
+                        <li className="list-group-item list-group-item-action" onClick={handleImprimir}><i className="fas fa-print pr-2"></i>Imprimir</li>
                     </ul>
                 </div>
             )}

@@ -7,6 +7,7 @@ use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\OrcamentoRoutineController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PdfOrcamentoController;
 
 Route::get('/login', function () {
     return Inertia::render('Login');
@@ -32,6 +33,9 @@ Route::get('/includeRoutine', function () {
 Route::post('/orcamento/routine/include', [OrcamentoRoutineController::class, 'store'])->name('/orcamento/routine/include');
 
 Route::post('/orcamento/routine/delete', [RoutineController::class, 'delete'])->name('/orcamento/routine/delete');
+
+Route::post('/orcamento/routine/print', [PdfOrcamentoController::class, 'print'])->name('/orcamento/routine/print');
+
 
 Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
 
