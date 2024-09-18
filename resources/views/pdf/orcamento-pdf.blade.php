@@ -119,9 +119,9 @@
             </tr>
         </thead>
         <tbody>
-            {{ $teste = 0 }}
+            {{ $valor_total = 0 }}
         @foreach($produtos as $produto)
-            {{ $teste += $produto->valor}}
+            {{ $valor_total += $produto->valor}}
             <tr>
                 <td>{{ $produto->produto }}</td>
                 <td>{{ $produto->descricao }}</td>
@@ -138,7 +138,7 @@
     <div class="total-section">
         <p><strong>Total de produtos:</strong> 2</p>
         <p><strong>Desconto:</strong> R$ 1.290,00</p>
-        <h3>R$ {{ $teste }}</h3>
+        <h3>R$ {{ $valor_total }}</h3>
     </div>
 
     <div class="signature">
