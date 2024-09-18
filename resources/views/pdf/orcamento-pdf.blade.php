@@ -80,28 +80,28 @@
 
     <table class="details-table">
         <tr>
-            <td><strong>Cliente:</strong> 1066 - IVAIPORÃ PR</td>
-            <td><strong>Fantasia:</strong></td>
-            <td><strong>CNPJ / CPF:</strong> 75.741.330/0001-37</td>
+            <td><strong>Cliente:</strong> {{ $cliente->nome }} </td>
+            <td><strong>Fantasia:</strong> {{ $cliente->nome_fantasia }} </td>
+            <td><strong>CNPJ / CPF:</strong> {{ $cliente->cpf_cnpj }} </td>
         </tr>
         <tr>
-            <td><strong>Endereço:</strong> , 1006</td>
-            <td><strong>Inscrição/RG:</strong></td>
-            <td><strong>Complemento:</strong></td>
+            <td><strong>Endereço:</strong> {{ $cliente->endereco }} </td>
+            <td><strong>Inscrição/RG:</strong> {{ $cliente->rg }} </td>
+            <td><strong>Complemento:</strong> {{ $cliente->complemento }} </td>
         </tr>
         <tr>
-            <td><strong>Cidade:</strong> Ivaiporã</td>
-            <td><strong>UF:</strong> PR</td>
-            <td><strong>Bairro:</strong> CENTRO</td>
+            <td><strong>Cidade:</strong> {{ $cliente->cidade }} </td>
+            <td><strong>UF:</strong> {{ $cliente->uf }} </td>
+            <td><strong>Bairro:</strong> {{ $cliente->bairro }} </td>
         </tr>
         <tr>
-            <td><strong>CEP:</strong></td>
-            <td><strong>Telefone:</strong> 4334711950</td>
-            <td><strong>Vendedor:</strong></td>
+            <td><strong>CEP:</strong> {{ $cliente->cep }} </td>
+            <td><strong>Telefone:</strong> {{ $cliente->telefone }} </td>
+            <td><strong>Vendedor:</strong> {{ $cliente->vendedor }} </td>
         </tr>
         <tr>
-            <td><strong>Celular:</strong></td>
-            <td><strong>Espécie:</strong></td>
+            <td><strong>Celular:</strong> {{ $cliente->celular }}</td>
+            <td></td>
             <td></td>
         </tr>
     </table>
@@ -111,32 +111,34 @@
             <tr>
                 <th>Código</th>
                 <th>Produto</th>
-                <th>UN</th>
+                <th>Valor Unitário</th>
                 <th>Qtd</th>
-                <th>Valor Unit</th>
                 <th>Desconto</th>
                 <th>Acréscimo</th>
                 <th>Valor Total</th>
             </tr>
         </thead>
         <tbody>
+            {{ $teste = 0 }}
+        @foreach($produtos as $produto)
+            {{ $teste += $produto->valor}}
             <tr>
-                <td>8187</td>
-                <td>Kit Reparo DX 180 LC ESTICADOR</td>
-                <td>UN</td>
-                <td>2</td>
-                <td>1.455,00</td>
-                <td>0,00</td>
-                <td>0,00</td>
-                <td>2.910,00</td>
+                <td>{{ $produto->produto }}</td>
+                <td>{{ $produto->descricao }}</td>
+                <td>{{ $produto->valor }}</td>
+                <td>{{ $produto->quantidade }}</td>
+                <td>{{ $produto->desconto }}</td>
+                <td>{{ $produto->acrescimo }}</td>
+                <td>{{ $produto->valor * $produto->quantidade }}</td>
             </tr>
+        @endforeach
         </tbody>
     </table>
 
     <div class="total-section">
         <p><strong>Total de produtos:</strong> 2</p>
         <p><strong>Desconto:</strong> R$ 1.290,00</p>
-        <h3>TOTAL: R$ 1.620,00</h3>
+        <h3>R$ {{ $teste }}</h3>
     </div>
 
     <div class="signature">
