@@ -119,7 +119,7 @@ export default function Routine() {
                                     <i className="fas fa-search"></i> Consultar
                                 </a>
                                 <a className="btn ml-3 btn-outline-primary" onClick={loadIncludeRoutine}>
-                                    <i className="fas fa-plus"></i>   Incluir
+                                    <i className="fas fa-plus"></i>  Incluir
                                 </a>
                             </div>
                         </div>

@@ -56,12 +56,15 @@
             @if(request()->is('includeRoutine'))
             <div id="react-include-routine"></div>
             @endif
+            @if(request()->is('entidade-routine'))
+                <div id="react-include-entidade-routine"></div>
+            @endif
             @inertia
         </div>
     </div>
     @endif
     @endif
-
+        
     @inertia
 
     @viteReactRefresh

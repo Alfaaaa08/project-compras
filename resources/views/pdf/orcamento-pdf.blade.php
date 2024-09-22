@@ -78,7 +78,7 @@
         <table class="no-border">
             <tr class="no-border">
                 <td class="no-border" width="10%">
-                    <img src="/images/example-logo.png" alt="Logo" class="brand-image img-circle">
+                    <img src="data:image/png;base64{{base64_encode(file_get_contents($logo_img))}}" alt="Logo">
                 </td>
                 <td class="no-border" width="50%">
                     <h2 id="nome-cliente">MAQPARTS PECAS LTDA</h2>
@@ -100,7 +100,7 @@
     <hr>
     <table class="details-table">
         <tr>
-            <td style="width: 33%;">Cliente: {{ $cliente->nome }}</td>
+            <td style="width: 33%;">Cliente: {{ $cliente->id }} - {{ $cliente->nome }}</td>
             <td style="width: 33%;">Fantasia: {{ $cliente->nome_fantasia }}</td>
         </tr>
         <tr>

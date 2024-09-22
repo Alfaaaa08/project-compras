@@ -10,8 +10,8 @@ export default function Sidebar() {
         if (path.includes('routine')) {
             setActiveRoutine('routine');
         } 
-        if (path.includes('routine-2')) {
-            setActiveRoutine('routine-2');
+        if (path.includes('entidade-routine')) {
+            setActiveRoutine('entidade-routine');
         }
     }, []); 
 
@@ -54,7 +54,7 @@ export default function Sidebar() {
                                 <i className="far fa-circle nav-icon"></i>
                                 <p>Orçamento</p>
                             </a>
-                            <a href="#"className={`nav-link m-2`} id="routine-entidades" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => loadRoutine(e.currentTarget.id)}>
+                            <a href="#"className={`nav-link m-2 ${activeRoutine === 'entidade-routine' ? 'active' : ''}`} id="entidade-routine" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => loadRoutine(e.currentTarget.id)}>
                                 <i className="far fa-circle nav-icon"></i>
                                 <p>Entidades</p>
                             </a>

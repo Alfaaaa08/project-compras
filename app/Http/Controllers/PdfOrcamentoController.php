@@ -51,28 +51,31 @@ class PdfOrcamentoController extends Controller {
 
         $produtos_data = $produtos_query->where('orcamentos.id', '=', $orcamento)->get()->toArray();
 
+        $logo_path = public_path('images/example-logo.png');
+
         $data = [
             'cliente' => (object) [
-                'id'=> $cliente_fabricante_data[0]->cliente,
-                'nome'=> $cliente_fabricante_data[0]->nome_cliente,  
-                'nome_fantasia'=> $cliente_fabricante_data[0]->nome_fantasia_cliente,
-                'endereco'=> $cliente_fabricante_data[0]->endereco_cliente,
-                'rg'=> $cliente_fabricante_data[0]->rg_cliente,
-                'cpf_cnpj'=> $cliente_fabricante_data[0]->cpf_cnpj_cliente,
-                'cep'=> $cliente_fabricante_data[0]->cep_cliente,
-                'uf'=> $cliente_fabricante_data[0]->uf_cliente,
-                'bairro'=> $cliente_fabricante_data[0]->bairro_cliente,
-                'complemento'=> $cliente_fabricante_data[0]->complemento_cliente,
-                'telefone'=> $cliente_fabricante_data[0]->telefone_cliente,
-                'celular'=> $cliente_fabricante_data[0]->celular_cliente,
-                'vendedor'=> $cliente_fabricante_data[0]->vendedor_cliente,
-                'cidade'=> $cliente_fabricante_data[0]->cidade_cliente,
+                'id'            => $cliente_fabricante_data[0]->cliente,
+                'nome'          => $cliente_fabricante_data[0]->nome_cliente,  
+                'nome_fantasia' => $cliente_fabricante_data[0]->nome_fantasia_cliente,
+                'endereco'      => $cliente_fabricante_data[0]->endereco_cliente,
+                'rg'            => $cliente_fabricante_data[0]->rg_cliente,
+                'cpf_cnpj'      => $cliente_fabricante_data[0]->cpf_cnpj_cliente,
+                'cep'           => $cliente_fabricante_data[0]->cep_cliente,
+                'uf'            => $cliente_fabricante_data[0]->uf_cliente,
+                'bairro'        => $cliente_fabricante_data[0]->bairro_cliente,
+                'complemento'   => $cliente_fabricante_data[0]->complemento_cliente,
+                'telefone'      => $cliente_fabricante_data[0]->telefone_cliente,
+                'celular'       => $cliente_fabricante_data[0]->celular_cliente,
+                'vendedor'      => $cliente_fabricante_data[0]->vendedor_cliente,
+                'cidade'        => $cliente_fabricante_data[0]->cidade_cliente,
             ],
             'fabricante' => (object) [
                 'nome_fabricante' => $cliente_fabricante_data[0]->nome_fabricante,
                 'cnpj_fabricante' => $cliente_fabricante_data[0]->cnpj_fabricante,
             ],
-            'produtos' => $produtos_data
+            'produtos' => $produtos_data,
+            'logo_img' => $logo_path
         ];
 
         $pdf = Pdf::loadView('pdf/orcamento-pdf', $data);
