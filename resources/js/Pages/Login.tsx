@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import axios from 'axios';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
 
-    const handleLoginClick = () => {
+    const handleLoginClick = async (event: any) => {
+        event.preventDefault();
+
         const data = {
             email,
             password
         };
 
-        const messages = getLoginValidationMessages(data);
+        const messages = await getLoginValidationMessages(data);
 
         if(messages) {
             alert(messages);
@@ -20,15 +23,14 @@ export default function Login() {
             return;
         }
 
-        Inertia.visit(`/`);
+        Inertia.visit('/');
     }
 
     /**
      * @param {Object} data 
      * @returns {Null|String}
-     * @todo Verify if the email is correct.
      */
-    const getLoginValidationMessages = (data: any) => {
+    const getLoginValidationMessages = async (data: any) => {
         if(!data.email) {
             return 'O campo Email é obrigatório.';
         }
@@ -37,7 +39,44 @@ export default function Login() {
             return 'O campo Senha é obrigatório.';
         }
 
-        return null;
+        const formData = new FormData();
+
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+
+        try {
+            // Enviando o FormData com axios
+            const response = await axios.post('/login/verifylogin', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data', // Define o tipo de conteúdo como FormData
+              },
+            });
+      
+            
+            const responseData = response.data;
+
+            if(!responseData.success) {
+                return responseData.message
+            }
+            
+            return null;
+          } catch (error) {
+            console.error('Erro na requisição:', error);
+          }
+    }
+
+    const handleRegisterClick = () => {
+        Inertia.visit('/register');
+    }
+
+    const handleForgottenPasswordClick = () => {    
+        if(!email) {
+            alert('Informe o e-mail para recuperar sua senha.');
+
+            return;
+        }
+
+        alert('Um e-mail de redefinição de senha foi enviado para o e-mail ' + email)
     }
 
     return (
@@ -101,10 +140,10 @@ export default function Login() {
                 </form>
 
                 <p className="mb-1">
-                    <a href="#">Esqueci minha senha</a>
+                    <a onClick={handleForgottenPasswordClick}>Esqueci minha senha</a>
                 </p>
                 <p className="mb-0">
-                    <a href="#" className="text-center">
+                    <a onClick={handleRegisterClick} className="text-center">
                         Registrar nova conta
                     </a>
                 </p>

@@ -9,14 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PdfOrcamentoController;
 
-Route::get('/login', function () {
-    return Inertia::render('Login');
-});
-
-Route::get('/register', function () {
-    return Inertia::render('Register');
-});
-
+#region Home
 Route::get('/', function () {
     return Inertia::render('/', [
         'laravelVersion' => Application::VERSION,
@@ -24,6 +17,29 @@ Route::get('/', function () {
     ]);
 });
 
+#endregion
+
+#region Register
+Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
+
+Route::get('/register', function () {
+    return Inertia::render('Register');
+});
+
+#endregion
+
+#region Login 
+Route::post('/save/login', [LoginController::class, 'store'])->name('/save/login');
+
+Route::post('/login/verifylogin', [LoginController::class, 'verifyLogin'])->name('/login/verifylogin');
+
+Route::get('/login', function () {
+    return Inertia::render('Login');
+});
+
+#endregion
+
+#region Orçamento
 Route::get('/routine', [RoutineController::class, 'index'])->name('routine');
 
 Route::get('/includeRoutine', function () {
@@ -36,10 +52,14 @@ Route::post('/orcamento/routine/delete', [RoutineController::class, 'delete'])->
 
 Route::post('/orcamento/routine/print', [PdfOrcamentoController::class, 'print'])->name('/orcamento/routine/print');
 
+#endregion
 
-Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
+#region Entidade
+Route::get('/entidade-routine', function () {
+    return Inertia::render('EntidadeRoutine');
+});
 
-Route::post('/save/login', [LoginController::class, 'store'])->name('/save/login');
+#endregion
 
 require __DIR__.'/auth.php';
 

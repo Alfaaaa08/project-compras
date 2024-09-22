@@ -32,6 +32,8 @@ export default function Register() {
             onError : error => console.log(error),
             onSuccess : success => console.log(success)
         });
+
+        Inertia.visit('/');
     } 
 
     /**
