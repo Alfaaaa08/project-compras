@@ -20,11 +20,13 @@ Route::get('/', function () {
 #endregion
 
 #region Register
-Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
-
 Route::get('/register', function () {
     return Inertia::render('Register');
 });
+
+Route::post('/save/register', [RegisterController::class, 'store'])->name('/save/register');
+
+Route::post('/register/verifyEmailRegistered', [RegisterController::class, 'verifyEmailRegistered'])->name('/register/verifyEmailRegistered');
 
 #endregion
 

@@ -15,4 +15,22 @@ class RegisterController extends Controller
             'senha' => Hash::make($request->password)
         ]);
     }
+
+    public function verifyEmailRegistered(Request $request) {
+        $email    = $request->input('email');
+
+        $usuario = Usuarios::where('email', $email)->first();
+
+        if($usuario) {
+            return response()->json([
+                'success' => false,
+                'message' => "O e-mail {$email} já está registrado no sistema."
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => ''
+        ]);
+    }
 }

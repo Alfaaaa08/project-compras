@@ -11,16 +11,16 @@ class LoginController extends Controller {
         $email    = $request->input('email');
         $password = $request->input('password');
 
-        $user = Usuarios::where('email', $email)->first();
+        $usuario = Usuarios::where('email', $email)->first();
 
-        if(!$user) {
+        if(!$usuario) {
             return response()->json([
                 'success' => false,
                 'message' => 'O e-mail informado não está cadastrado.'
             ]);
         }
 
-        if(!Hash::check($password, $user->senha)) {
+        if(!Hash::check($password, $usuario->senha)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Senha incorreta.'    

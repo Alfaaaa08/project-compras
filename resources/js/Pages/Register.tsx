@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Inertia } from '@inertiajs/inertia';
+import axios from 'axios';
 
 export default function Register() {
     const [name, setName]                       = useState('');
@@ -7,10 +8,7 @@ export default function Register() {
     const [password, setPassword]               = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    /**
-     * @todo Add the registering of the user
-     */
-    const handleRegisterButtonClick = (e: any) => {
+    const handleRegisterButtonClick = async (e: any) => {
         e.preventDefault();
 
         const data = {
@@ -20,7 +18,7 @@ export default function Register() {
             confirmPassword
         }
 
-        const messages = getRegisterValidationMessages(data);
+        const messages = await getRegisterValidationMessages(data);
 
         if(messages) {
             alert(messages)
@@ -39,9 +37,8 @@ export default function Register() {
     /**
      * @param {Object} data 
      * @return {Null|String}
-     * @todo Verify if the email is already registered in the system.
      */
-    const getRegisterValidationMessages = (data : any) => {
+    const getRegisterValidationMessages = async (data : any) => {
         if(!data.name) {
             return 'O campo Nome é obrigatório.'
         }
@@ -55,9 +52,25 @@ export default function Register() {
             return 'Confirme sua senha.';
         }
         if(data.password != data.confirmPassword) {
-            return 'Suas senhas não são iguais.'
+            return 'As senhas informadas não são iguais.'
         }
 
+        const formData = new FormData();
+
+        formData.append('email', data.email);
+
+        const response = await axios.post('/register/verifyEmailRegistered', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        
+        const responseData = response.data;
+
+        if(!responseData.success) {
+            return responseData.message
+        }
+        
         return null;
     }
 

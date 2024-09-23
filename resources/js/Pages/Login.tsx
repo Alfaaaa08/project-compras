@@ -44,25 +44,19 @@ export default function Login() {
         formData.append('email', data.email);
         formData.append('password', data.password);
 
-        try {
-            // Enviando o FormData com axios
-            const response = await axios.post('/login/verifylogin', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data', // Define o tipo de conteúdo como FormData
-              },
-            });
-      
-            
-            const responseData = response.data;
+        const response = await axios.post('/login/verifylogin', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        
+        const responseData = response.data;
 
-            if(!responseData.success) {
-                return responseData.message
-            }
-            
-            return null;
-          } catch (error) {
-            console.error('Erro na requisição:', error);
-          }
+        if(!responseData.success) {
+            return responseData.message
+        }
+        
+        return null;
     }
 
     const handleRegisterClick = () => {
