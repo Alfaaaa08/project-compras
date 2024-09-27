@@ -63,12 +63,23 @@ export default function Login() {
         Inertia.visit('/register');
     }
 
-    const handleForgottenPasswordClick = () => {    
+    const handleForgottenPasswordClick = async () => {    
         if(!email) {
             alert('Informe o e-mail para recuperar sua senha.');
 
             return;
         }
+
+        const formData = new FormData();
+
+        formData.append('email', email);
+
+        const response = await axios.post('/login/resetPassword', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
 
         alert('Um e-mail de redefinição de senha foi enviado para o e-mail ' + email)
     }
