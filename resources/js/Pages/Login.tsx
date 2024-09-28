@@ -77,6 +77,7 @@ export default function Login() {
         const response = await axios.post('/login/resetPassword', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
+                // 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
         });
 

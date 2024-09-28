@@ -5,7 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuarios extends Model {
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+
+class Usuarios extends Model implements CanResetPassword{
+    use Notifiable, \Illuminate\Auth\Passwords\CanResetPassword;
     protected $table = 'usuarios';
 
     protected $fillable = [

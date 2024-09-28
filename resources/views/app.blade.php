@@ -52,7 +52,7 @@
     </div>
     @endif
     @endif
-        
+    @csrf
     @inertia
     @viteReactRefresh
     @vite('resources/js/app.tsx')
