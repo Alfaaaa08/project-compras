@@ -63,7 +63,9 @@ export default function Login() {
         Inertia.visit('/register');
     }
 
-    const handleForgottenPasswordClick = async () => {    
+    const handleForgottenPasswordClick = async (event: any) => {    
+        event.preventDefault();
+        
         if(!email) {
             alert('Informe o e-mail para recuperar sua senha.');
 

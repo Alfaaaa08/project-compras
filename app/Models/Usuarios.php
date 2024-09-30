@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use \App\Notifications\CustomResetPassword;
 
 class Usuarios extends Model implements CanResetPassword{
     use Notifiable, \Illuminate\Auth\Passwords\CanResetPassword;
@@ -27,4 +28,8 @@ class Usuarios extends Model implements CanResetPassword{
     protected $keyType = 'int';
 
     public $timestamps = false;
+
+    public function sendPasswordResetNotification($token) {
+        $this->notify(new CustomResetPassword($token));
+    }
 }
