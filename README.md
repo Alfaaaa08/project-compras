@@ -1,6 +1,5 @@
 ## Budget Creator and Printer
 
-
 # Overview
 Budget Creator and Printer is a user-friendly application designed to streamline the process of creating, managing, and printing budgets. With the ability to save products, clients, and manufacturers, this tool simplifies budget preparation and enhances efficiency.
 

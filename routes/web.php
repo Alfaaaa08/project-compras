@@ -40,7 +40,7 @@ Route::get('/login', function () {
     return Inertia::render('Login');
 });
 
-Route::post('login/resetPassword', [CustomPasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::post('login/resetPassword', [CustomPasswordResetController::class, 'sendResetPasswordEmail'])->name('password.reset');
 #endregion
 
 #region Orçamento

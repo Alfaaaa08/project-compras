@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomPasswordResetController extends Controller {
     public function resetPassword(Request $request) {
+        phpinfo();
+        die;
         $validator = Validator::make($request->all(), [
             'email' => 'required|email'
         ]);
@@ -16,7 +18,6 @@ class CustomPasswordResetController extends Controller {
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        
         $status = Password::sendResetLink(
             $request->only('email')
         );
